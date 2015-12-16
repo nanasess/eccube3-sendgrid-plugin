@@ -1,0 +1,5 @@
+name: SendGridLight
+code: SendGridLight
+version: 0.0.1
+service:
+    - SendGridLightServiceProvider

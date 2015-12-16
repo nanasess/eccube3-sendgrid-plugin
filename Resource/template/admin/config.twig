@@ -1,0 +1,22 @@
+{% extends 'SendGridLight/Resource/template/admin/config_frame.twig' %}
+
+{% block config_header %}
+    {% block title %}SendGrid プラグイン Light{% endblock %}
+    {% block sub_title %}{% endblock %}
+
+    {% form_theme form 'Form/bootstrap_3_horizontal_layout.html.twig' %}
+
+    {% block stylesheet %}
+        {{ parent() }}
+    {% endblock stylesheet %}
+    {% block javascript %}
+        {{ parent() }}
+    {% endblock javascript %}
+{% endblock config_header %}
+
+{% block config_main %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        </div>
+    </div>
+{% endblock config_main %}
