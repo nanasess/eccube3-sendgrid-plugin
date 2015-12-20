@@ -49,9 +49,13 @@ class SendGridWrapper
     }
     public function send($message)
     {
+        $SendGridLight = $app['eccube.plugin.repository.sendgridlight']->find(1);
+        if (!$SendGridLight) {
+            throw new \Exception('SendGrid not found.');
+        }
         $sendgrid = new SendGrid(
-            $this->app['config']['sendgrid']['api_user'],
-            $this->app['config']['sendgrid']['api_key']
+            $SendGridLight->getApiUser(),
+            $SendGridLight->getApiKey()
         );
         $email = new Email();
         //$name = array('Elmer');
