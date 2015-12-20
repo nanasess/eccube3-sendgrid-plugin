@@ -21,6 +21,11 @@ class SendGridLightServiceProvider implements ServiceProviderInterface
             return $types;
         }));
 
+        // Repository
+        $app['eccube.plugin.repository.sendgridlight'] = $app->share(function () use ($app) {
+            return $app['orm.em']->getRepository('Plugin\SendGridLight\Entity\SendGridLight');
+        });
+
     }
     public function boot(BaseApplication $app)
     {

@@ -1,0 +1,19 @@
+Plugin\SendGridLight\Entity\SendGridLight:
+    type: entity
+    table: plg_sendgridlight
+    repositoryClass: Plugin\SendGridLight\Repository\SendGridLightRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: sendgrid_id
+    fields:
+        api_user:
+            type: text
+            nullable: true
+        api_key:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

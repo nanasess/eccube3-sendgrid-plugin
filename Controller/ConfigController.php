@@ -12,11 +12,14 @@ class ConfigController extends AbstractController
 {
     public function index(Application $app, Request $request)
     {
-        $SendGridLight = new SendGridLight();
+        $SendGridLight = $app['eccube.plugin.repository.sendgridlight']->find(1);
+        if (!is_object($SendGridLight)) {
+            $SendGridLight = new SendGridLight();
+        }
         $form = $app['form.factory']->createBuilder('sendgridlight_config', $SendGridLight)->getForm();
         return $app->render('SendGridLight/Resource/template/admin/config.twig', array(
             'form' => $form->createView(),
-            // 'SendGrid' => $SendGrid,
+            'SendGrid' => $SendGridLight,
         ));
     }
 }

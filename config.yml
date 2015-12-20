@@ -3,3 +3,5 @@ code: SendGridLight
 version: 0.0.1
 service:
     - SendGridLightServiceProvider
+orm.path:
+  - /Resource/doctrine
