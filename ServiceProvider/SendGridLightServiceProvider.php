@@ -5,6 +5,8 @@ use Eccube\Application;
 use Silex\Application as BaseApplication;
 use Silex\ServiceProviderInterface;
 use Plugin\SendGridLight\Form\Type;
+use SendGrid\Email;
+use SendGrid;
 
 class SendGridLightServiceProvider implements ServiceProviderInterface
 {
@@ -30,9 +32,47 @@ class SendGridLightServiceProvider implements ServiceProviderInterface
         $app['eccube.plugin.repository.sendgridlight'] = $app->share(function () use ($app) {
             return $app['orm.em']->getRepository('Plugin\SendGridLight\Entity\SendGridLight');
         });
-
+        $app['mailer'] = $app->share(function ($app) {
+            return new SendGridWrapper($app);
+        });
     }
     public function boot(BaseApplication $app)
     {
+    }
+}
+class SendGridWrapper
+{
+    protected $app;
+    public function __construct($app)
+    {
+        $this->app = $app;
+    }
+    public function send($message)
+    {
+        $sendgrid = new SendGrid(
+            $this->app['config']['sendgrid']['api_user'],
+            $this->app['config']['sendgrid']['api_key']
+        );
+        $email = new Email();
+        //$name = array('Elmer');
+        $to = $message->getTo();
+        $to_emails = array_keys($to);
+        $from = $message->getFrom();
+        $from_emails = array_keys($from);
+
+        $email
+            ->addTo($to_emails[0]) // 配列数分設定する
+            ->setFrom($from_emails[0])
+            ->setSubject($message->getSubject())
+            ->setText($message->getBody())
+            ->setBcc($message->getBcc())
+            ->setReplyTo($message->getReplyTo())
+            // ->setReturnPath($message->getRealPath())
+            // ->setHtml('<strong>I\'m HTML!</strong>')
+            // ->addFilter('templates', 'enabled', 1)
+            // ->addFilter('templates', 'template_id', $templateId)
+            // ->addSubstitution(":name", $name)
+            ;
+        $sendgrid->send($email);
     }
 }
