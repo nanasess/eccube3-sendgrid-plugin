@@ -17,25 +17,28 @@
 {% block config_main %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="form-group {% if form.api_user.vars.errors|length %} has-error {% endif %}">
-                <label class="col-sm-4 control-label">API User <span class="text-danger">*</span></label>
-                <div class="col-sm-8">
-                    {{ form_widget(form.api_user) }}
-                    {{ form_errors(form.api_user) }}
+            <form class="form-horizontal" method="post" action="{{ url('plugin_SendGridLight_config') }}" {{ form_enctype(form) }}>
+                {{ form_widget(form._token) }}
+                <div class="form-group {% if form.api_user.vars.errors|length %} has-error {% endif %}">
+                    <label class="col-sm-4 control-label">API User <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.api_user) }}
+                        {{ form_errors(form.api_user) }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-group {% if form.api_key.vars.errors|length %} has-error {% endif %}">
-                <label class="col-sm-4 control-label">API Key <span class="text-danger">*</span></label>
-                <div class="col-sm-8">
-                    {{ form_widget(form.api_key, {'type': 'password'}) }}
-                    {{ form_errors(form.api_key) }}
+                <div class="form-group {% if form.api_key.vars.errors|length %} has-error {% endif %}">
+                    <label class="col-sm-4 control-label">API Key <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.api_key, {'type': 'password'}) }}
+                        {{ form_errors(form.api_key) }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">入力した内容で登録</button>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">入力した内容で登録</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock config_main %}

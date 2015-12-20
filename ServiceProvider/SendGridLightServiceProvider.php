@@ -15,6 +15,11 @@ class SendGridLightServiceProvider implements ServiceProviderInterface
             'Plugin\SendGridLight\Controller\ConfigController::index')
             ->bind('plugin_SendGridLight_config');
 
+        $app->match(
+            '/'.$app['config']['admin_route'].'/plugin/SendGridLight/config_complete',
+            'Plugin\SendGridLight\Controller\ConfigController::complete')
+            ->bind('plugin_SendGridLight_config_complete');
+
         // Form
         $app['form.types'] = $app->share($app->extend('form.types', function ($types) use ($app) {
             $types[] = new \Plugin\SendGridLight\Form\Type\SendGridLightConfigType($app);
