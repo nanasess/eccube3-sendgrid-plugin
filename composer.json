@@ -1,0 +1,14 @@
+{
+    "name": "nanasess/sendgrid-light",
+    "description": "SendGrid plugin for EC-CUBE",
+    "require": {
+        "sendgrid/sendgrid": "~4.0"
+    },
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Kentaro Ohkouchi",
+            "email": "nanasess@fsm.ne.jp"
+        }
+    ]
+}

@@ -1,5 +1,8 @@
 <?php
+
 namespace Plugin\SendGridLight\ServiceProvider;
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Eccube\Application;
 use Silex\Application as BaseApplication;
@@ -49,7 +52,7 @@ class SendGridWrapper
     }
     public function send($message)
     {
-        $SendGridLight = $app['eccube.plugin.repository.sendgridlight']->find(1);
+        $SendGridLight = $this->app['eccube.plugin.repository.sendgridlight']->find(1);
         if (!$SendGridLight) {
             throw new \Exception('SendGrid not found.');
         }
